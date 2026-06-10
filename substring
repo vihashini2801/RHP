@@ -1,0 +1,30 @@
+package june;
+import java.util.*;
+public class LCS {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str1 = sc.nextLine();
+		String str2 = sc.nextLine();
+		int l1 = str1.length();
+		int l2 = str2.length();
+		int[][] arr = new int[l1][l2];
+		for(int row = 0; row < l1; row++) {
+			for(int col = 0; col < l2; col++) {
+				if(str1.charAt(row) != str2.charAt(col)) {
+					arr[row][col] = 0;
+				}else {
+					int ar = row + (-1);
+					int ac = col + (-1);
+					if(row != 0 && col != 0) {
+					arr[row][col] = 1 + arr[ar][ac];
+					}else {
+						arr[row][col] = 1;
+					}
+				}
+			}
+		}
+		System.out.println(arr[l1-1][l2-1]);
+	}
+
+}
