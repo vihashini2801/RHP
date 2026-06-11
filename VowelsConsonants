@@ -1,0 +1,31 @@
+import java.util.*;
+public class vowelsConsonants {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		int count = 0;
+		for(int i = 0; i < str.length(); i++) {
+			for(int j = str.length()-1; j >= i; j--) {
+				String str2 = str.substring(i, j+1);
+				int val = 0;
+				for(int k = i; k <= j ; k++) {
+			        char ch = str.charAt(k);
+			        
+			        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+				          val = val + 1;
+			        }else {
+				          val = val - 1;
+			        }
+				}
+				if(val == 0) {
+					int t = str2.length();
+					count = Math.max(count, t);
+				}
+			}
+		}
+		System.out.println(count);
+
+	}
+
+}
