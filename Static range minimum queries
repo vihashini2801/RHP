@@ -1,0 +1,29 @@
+import java.util.*;
+public class static_range_minimum_queries {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int q = sc.nextInt();
+		int[] arr = new int[n+1];
+		for(int i = 1; i <= n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		List<Integer> list = new ArrayList<>();
+		for(int i = 0; i < q; i++) {
+			int lt = sc.nextInt();
+			int rt = sc.nextInt();
+			int m = 10000000;
+			for(int j = lt; j <= rt; j++) {
+				m = Math.min(m, arr[j]);
+			}
+			list.add(m);
+			
+		}
+		for(int t : list) {
+			System.out.println(t);
+		}
+
+	}
+
+}
