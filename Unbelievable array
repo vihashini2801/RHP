@@ -1,0 +1,32 @@
+import java.util.*;
+public class Unbelievable_array {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		for(int i = 0; i < t; i++){
+			System.out.println("Case " + (i+1) + ":");
+			int n = sc.nextInt();
+			int q = sc.nextInt();
+			int[] arr = new int[n+1];
+			for(int j = 1; j < n+1; j++){
+				arr[j] = sc.nextInt();
+			}
+			for(int j = 0; j < q; j++){
+				int lt = sc.nextInt();
+				if(lt == 1){
+					int x = sc.nextInt();
+					int y = sc.nextInt();
+					for(int k = 1; k <= n; k++) {
+						if(arr[k] == x) {
+							arr[k] = y;
+						}
+					}
+				}else{
+					int rt = sc.nextInt();
+					System.out.println(arr[rt]);
+				}
+			}
+		}
+	}
+}
