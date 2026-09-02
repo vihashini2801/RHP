@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+public class Inc_dec_xor {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder out = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int Q = Integer.parseInt(st.nextToken());
+        long[] value = new long[N + 1];
+        long offset = 0;
+        long xor = 0;
+        for (int q = 0; q < Q; q++) {
+            st = new StringTokenizer(br.readLine());
+            int type = Integer.parseInt(st.nextToken());
+            if (type == 1) {
+                int x = Integer.parseInt(st.nextToken());
+                long oldValue = value[x] - offset;
+                long newValue = oldValue + 1;
+                xor ^= oldValue;
+                xor ^= newValue;
+                value[x] = newValue + offset;
+            } else {
+                offset++;
+            }
+            out.append(xor).append('\n');
+        }
+        System.out.print(out);
+    }
+}
+
