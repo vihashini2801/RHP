@@ -1,0 +1,50 @@
+import java.util.*;
+public class New_Friends {
+	public static void join(int[] arr, int e1, int e2) {
+		int lt = find(arr,e1);
+		int rt = find(arr,e2);
+		arr[lt] = rt;
+	}
+	public static int find(int[] arr,int t) {
+		if(arr[t] != t) {
+			arr[t] = find(arr,arr[t]);
+		}
+		return arr[t];
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] arr = new int[n+1];
+		for(int i = 1; i < n+1; i++) {
+			arr[i] = i;
+		}
+		int e = sc.nextInt();
+		int[] earr = new int[e];
+		for(int i = 0; i < e; i++) {
+			int e1 = sc.nextInt();
+			int e2 = sc.nextInt();
+			earr[i] = e1;
+			join(arr,e1,e2);
+		}
+		int[] gcnt = new int[n+1];
+		int[] ecnt = new int[n+1];
+		for(int i = 1; i < n+1; i++) {
+			int s = find(arr,i);
+			gcnt[s] += 1;
+			
+		}
+		for(int i = 0; i < e; i++) {
+			int c = find(arr,earr[i]);
+			ecnt[c]++;
+		}
+		long ans = 0;
+		for(int i = 1; i < n+1; i++) {
+			int count = gcnt[i];
+			ans += ((count*(count-1))/2 - ecnt[i]);
+			
+		}
+		System.out.println(ans);
+		
+	}
+
+}
