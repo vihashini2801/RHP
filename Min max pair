@@ -1,0 +1,25 @@
+import java.util.*;
+public class min_max_pair {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int same = 0, exchange = 0;
+		int[] arr = new int[n+1];
+		for(int i = 1; i <= n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		for(int i = 1; i <= n; i++) {
+		if(arr[i] == i) {
+			same++;
+		}else if(arr[arr[i]] == i) {
+			exchange++;
+		}
+		}
+		exchange = exchange/2;
+		long res = exchange + ((same*(same-1))/2);
+		System.out.println(res);
+
+	}
+
+}
