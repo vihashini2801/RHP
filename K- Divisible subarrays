@@ -1,0 +1,27 @@
+import java.util.*;
+public class K_divisible_subarray {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int rem = 0, count = 0;
+		int[] arr = new int[n+1];
+		int[] dp = new int[n+1];
+		Map<Integer, Integer> map = new HashMap<>();
+		map.put(0, 1);
+		for(int i = 1; i <= n; i++) {
+			arr[i] = sc.nextInt();
+			rem = (rem + arr[i]) % k;
+			if(map.containsKey(rem)) {
+				dp[i] = Math.max(dp[i-1], 1 + map.getOrDefault(rem, 0));
+			}else {
+				dp[i] = dp[i-1];
+			}
+			map.put(rem, i);
+		}
+		System.out.println(dp[n]);
+
+	}
+
+}
