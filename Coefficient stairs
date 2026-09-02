@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+public class Coefficient_stair {
+    static int N, K;
+    static int[] A;
+    static StringBuilder out = new StringBuilder();
+    static void dfs(int index, int remaining) {
+        if (index > N) {
+            if (remaining == 0) {
+                for (int i = 1; i <= N; i++) {
+                    if (i > 1) {
+                        out.append(" ");
+                    }
+                    out.append(A[i]);
+                }
+                out.append("\n");
+            }
+            return;
+        }
+        int maxValue = remaining / index;
+        for (int value = 0; value <= maxValue; value++) {
+            A[index] = value;
+            dfs(
+                index + 1,
+                remaining - index * value
+            );
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        BufferedReader br =
+            new BufferedReader(
+                new InputStreamReader(System.in)
+            );
+        StringTokenizer st =
+            new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+        A = new int[N + 1];
+        dfs(1, K);
+        System.out.print(out);
+    }
+}
+
