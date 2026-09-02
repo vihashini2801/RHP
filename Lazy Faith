@@ -1,0 +1,81 @@
+import java.util.*;
+public class Lazy_Faith {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		int shrine = sc.nextInt();
+		int temple = sc.nextInt();
+		int query = sc.nextInt();
+		int[] arrshrine = new int[shrine];
+		for(int i = 0; i < shrine; i++) {
+			arrshrine[i] = sc.nextInt();
+		}
+		Arrays.sort(arrshrine);
+		int[] arrtemple = new int[temple];
+		for(int i = 0; i < temple; i++) {
+			arrtemple[i] = sc.nextInt();
+		}
+		Arrays.sort(arrtemple);
+		while(query > 0) {
+			int p = sc.nextInt();
+			int shrinepoint = Arrays.binarySearch(arrshrine, p);
+			if(shrinepoint < 0) {
+				shrinepoint = -(shrinepoint)-1;
+			}
+			int lbs = shrinepoint - 1;
+			int ubs = 0;
+			if(shrinepoint == shrine) {
+				ubs = shrinepoint;
+			}else {
+			    ubs = shrinepoint-1;
+			    }
+			int lps = Math.abs(p-arrshrine[lbs]);
+			int rps = Math.abs(p-arrshrine[ubs]);
+			int sh = Math.min(lps, rps);
+			int templepoint = Arrays.binarySearch(arrtemple, p);
+			if(templepoint < 0) {
+				templepoint = -(templepoint)-1;
+			}
+			
+			int lbt = templepoint-1;
+			int ubt = 0;
+			if(templepoint == temple) {
+				ubt = templepoint;
+			}else {
+			    ubt = templepoint-1;
+			    }
+			int lpt = Math.abs(p-arrtemple[lbt]);
+			int rpt = Math.abs(p-arrtemple[ubt]);
+			int te = Math.min(lpt, rpt);
+			int ans = 0;
+			if(sh < te) {
+				ans += sh;
+				int next = Arrays.binarySearch(arrtemple, sh);
+				if(next < 0) {
+					next = -(next)-1;
+				}
+				int lb = next;
+				int ub = next+1;
+				int nlp = Math.abs(sh-arrtemple[lb]);
+				int nrp = Math.abs(sh - arrtemple[ub]);
+				ans+=Math.min(nlp, nrp);
+			}else {
+				ans += te;
+				int next = Arrays.binarySearch(arrshrine, te);
+				if(next < 0) {
+					next = -(next)-1;
+				}
+				int lb = next-1;
+				int ub = next;
+				int nlp = Math.abs(sh-arrtemple[lb]);
+				int nrp = Math.abs(sh - arrtemple[ub]);
+				ans+=Math.min(nlp, nrp);
+			}
+			System.out.println(ans);
+			query--;
+			
+		}
+	}
+
+}
